@@ -31,7 +31,8 @@ export default class Def extends React.Component {
              </View>
 
              <View style={styles.button}>
-            <TouchableOpacity style={{width:'100%',height:40,backgroundColor:'red', 
+            <TouchableOpacity onPress={()=>this.props.navigation.navigate('Photo')}
+             style={{width:'100%',height:40,backgroundColor:'red', 
                                                 alignItems:'center',justifyContent:'center'}}  >
               <Text style={styles.text}>Submit</Text>
             </TouchableOpacity>
