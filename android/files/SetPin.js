@@ -1,7 +1,7 @@
 
 import React, { Component } from 'react';
 import {
-  StyleSheet,Text,View,Image,TextInput,TouchableOpacity
+  StyleSheet,Text,View,Image,TextInput,TouchableOpacity,TouchableWithoutFeedback,Keyboard
 
 } from 'react-native';
  
@@ -13,20 +13,25 @@ export default class Def extends React.Component {
     
  
     return (
+      <TouchableWithoutFeedback onPress={()=>{
+        Keyboard.dismiss();
+        console.log('dismissed keyboard')
+      }}>
         <View style={styles.regform}>
             <View style={{paddingLeft:10,paddingRight:20,alignItems:'center'}}>
             <Text style={{fontSize:18,fontWeight:'bold'}}>Enter Pin</Text>
 
             <TextInput style={styles.textinput1} placeholder="****"
                 secureTextEntry
-                underlineColorAndroid={'transparent'} />
+                underlineColorAndroid={'transparent'} keyboardType={'numeric'}/>
 
             <Text style={{fontSize:18,fontWeight:'bold',paddingTop:30}}>Confirm Pin</Text>
             
             
             <TextInput style={styles.textinput1} placeholder="****"
                 secureTextEntry
-                underlineColorAndroid={'transparent'} />
+                underlineColorAndroid={'transparent'} keyboardType={'numeric'} 
+                maxlength="10" />
                
              </View>
 
@@ -39,6 +44,7 @@ export default class Def extends React.Component {
           </View>
 
          </View>
+         </TouchableWithoutFeedback>
     );
   }
 }

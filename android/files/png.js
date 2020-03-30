@@ -15,7 +15,7 @@ import {
   View,
   ToastAndroid,
   TextInput,
-  Image,TouchableOpacity,options
+  Image,TouchableOpacity,options,TouchableWithoutFeedback,Keyboard
 } from 'react-native';
 
 import RadioForm, {
@@ -78,6 +78,12 @@ export default class App extends React.Component {
 
   render() {
     return (
+      <TouchableWithoutFeedback onPress={()=>{
+        Keyboard.dismiss();
+        console.log('dismissed keyboard')
+      }}>
+
+      
       <View style={{padding:20}}>
         <Text style={{fontWeight:"bold",fontSize:20,textAlign:'center'}} >Choose ID document</Text>
         <RadioForm radio_props={document}
@@ -128,16 +134,10 @@ export default class App extends React.Component {
                 </View>
                 <Text style={{paddingHorizontal:20}}>document front side            document back side </Text>
                
-                {/* <TouchableOpacity onPress={()=>this.props.navigation.navigate('Photo')}
-             style={{width:'100%',height:40,backgroundColor:'red', 
-                                                alignItems:'center',justifyContent:'center'}}  >
-              <Text style={styles.text}>Submit</Text>
-            </TouchableOpacity> */}
-           
-
-            </View>
+               </View>
             </View>
       </View>
+      </TouchableWithoutFeedback>
 
 
     );

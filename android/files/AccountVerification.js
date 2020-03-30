@@ -1,9 +1,10 @@
 
 import React, { Component } from 'react';
 import {
-  StyleSheet,Text,View,Image,TextInput,TouchableOpacity
+  StyleSheet,Text,View,Image,TextInput,TouchableOpacity,TouchableWithoutFeedback,Keyboard
 
 } from 'react-native';
+import styles from './styles/styles'
 export default class Def extends React.Component {
     constructor(props){
         super(props)
@@ -12,19 +13,23 @@ export default class Def extends React.Component {
     
  
     return (
-       
+      <TouchableWithoutFeedback onPress={()=>{
+        Keyboard.dismiss();
+        console.log('dismissed keyboard')
+      }}>
             <View style={styles.regform}>
                 <View style={{paddingLeft:60,paddingRight:50}}>
                 <Text>A Verification code has been sent to{"\n"}
                      your registered mobile number {"\n"}
                      +973111111111 </Text>
-                 <Text style={styles.title}>Please enter it below</Text>
+                 <Text style={styles.title1}>Please enter it below</Text>
 
-                <TextInput style={styles.textinput} placeholder="XXXXXX"
+                <TextInput style={styles.textinput1} placeholder="XXXXXX"
                 secureTextEntry
-                underlineColorAndroid={'transparent'} />
+                underlineColorAndroid={'transparent'} 
+                keyboardType={'numeric'} />
 
-                 <Text style={styles.text}>Did not get the code?</Text>
+                 <Text style={styles.text1}>Did not get the code?</Text>
                  <View style={{flexDirection:'column',justifyContent:'space-between'}}>
                 <TouchableOpacity >
  
@@ -32,7 +37,7 @@ export default class Def extends React.Component {
                 source={require('../files/images/refresh.png')} 
                 style={styles.ImageIconStyle} 
                 />
-                <Text style={styles.buttonText}>
+                <Text style={styles.buttonText1}>
 
                   Click to resend OTP
                 </Text>
@@ -42,12 +47,14 @@ export default class Def extends React.Component {
                 </View>
                      <View style={styles.button}>
                         <TouchableOpacity onPress={()=>this.props.navigation.navigate('Security Questions')}
-                        style={{width:'90%',height:40,backgroundColor:'red', 
-                                                alignItems:'center',justifyContent:'center',}}>
+                        style={styles.button1}
+                        
+                                                >
                             <Text style={{color:'white', fontSize: 16}}>Verify</Text>
                          </TouchableOpacity>
                 </View>
             </View>
+            </TouchableWithoutFeedback>
 
             
         );
@@ -55,66 +62,3 @@ export default class Def extends React.Component {
 }
 
 
-const styles=StyleSheet.create({
-
-    button:{
-        position:'absolute',
-        backgroundColor:'red',
-        bottom:0,
-        width:'100%',
-        alignItems:'center',
-        height:30
-      },
-    regform:{
-        alignSelf:'stretch',
-        paddingTop:150,
-        flex:1
-        
-    },
-
-    textinput:{
-        fontSize:20,
-        color:'black',
-        paddingBottom:10,
-         marginBottom:30,
-         borderBottomColor:'red',
-        borderBottomWidth:1,
-    
-    
-    },
-    text:{
-        fontWeight:"bold",
-        
-    },
-    title:{
-        padding:20,
-        fontWeight:"bold"
-    },
-    logo1:{
-        width:50,
-        height:50,
-        
-    },
-    ImageIconStyle: {
-        height: 50,
-        width: 50,
-        resizeMode : 'stretch',
-      
-     },
-     buttonText :{
- 
-        color: 'red',
-        textAlign:'center',
-        
-        
-    },
-    button1:{
-        color:'red',
-     },
-     
-
-    
-
-     
-    
-  })
