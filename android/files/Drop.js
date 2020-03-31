@@ -48,8 +48,9 @@ export default class Drop extends React.Component {
           
         </View>
         <View style={styles.numerview}>
-          <Dropdown data={data} label="989"style={{width:50,padding:20}}/>
-         
+          <View style={{width:60}}>
+          <Dropdown data={data} value={971}/>
+          </View>
           <TextInput style={styles.textInput} placeholder="Phone Number" keyboardType={'numeric'}/>
           </View>
           <View style={styles.button}>
