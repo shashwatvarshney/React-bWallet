@@ -5,10 +5,31 @@ import {
 
 } from 'react-native';
 import styles from './styles/styles'
+import Snackbar from 'react-native-snackbar';
 export default class Def extends React.Component {
     constructor(props){
         super(props)
+        this.state={
+        pin:null
       }
+      }
+      validate=()=>{
+        if(this.state.pin.length<6){
+        Snackbar.show({
+          text:'Please enter a vaild OTP ',
+          duration:Snackbar.LENGTH_INDEFINITE,
+          action:{
+            text:"OK",
+            textColor: 'red',
+            backgroundColor:'black',
+            
+          }
+        })
+      }
+      else
+      this.props.navigation.navigate("Security Questions")
+      }
+
   render() {
     
  
@@ -24,12 +45,18 @@ export default class Def extends React.Component {
                      +973111111111 </Text>
                  <Text style={styles.title1}>Please enter it below</Text>
 
-                <TextInput style={styles.textinput1} placeholder="XXXXXX"
+                <TextInput maxLength={6} style={styles.textinput1} placeholder="XXXXXX"
+                 onChangeText={(p)=>{this.setState({pin:p})}}
                 secureTextEntry
                 underlineColorAndroid={'transparent'} 
                 keyboardType={'numeric'} />
 
                  <Text style={styles.text1}>Did not get the code?</Text>
+                
+
+
+                 
+
                  <View style={{flexDirection:'column',justifyContent:'space-between'}}>
                 <TouchableOpacity >
  
@@ -46,7 +73,7 @@ export default class Def extends React.Component {
                 </View>
                 </View>
                      <View style={styles.button}>
-                        <TouchableOpacity onPress={()=>this.props.navigation.navigate('Security Questions')}
+                     <TouchableOpacity onPress={this.validate}
                         style={styles.button1}
                         
                                                 >
