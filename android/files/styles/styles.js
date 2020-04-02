@@ -124,15 +124,7 @@ export default StyleSheet.create({
         width:"100%"
     },
 
-    // container1: {
-    //     flex: 1,
-    //     justifyContent: 'center',
-    //     alignItems: 'center',
-    //     backgroundColor: 'white',
-    //   },
-    //   dropdown: {
-    //     width: '80%',
-    //   }
+    
 
     
     

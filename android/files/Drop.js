@@ -24,21 +24,35 @@ export default class Drop extends React.Component {
     }
   }
   validate=()=>{
-    if(this.state.mobileNo.length<8){
+       
+    var text1='Enter a valid Mobile Number'
+    var text2="Mobile Number must be atleast 8 digits"
+    
+    var text=''
+    var shows=false
+    var defaultpin=123456
+    if(this.state.mobileNo==null){
+        text=text1
+    }else if(this.state.mobileNo.length<8){
+        text=text2
+    }
+    else {
+    this.props.navigation.navigate("Account Verification")
+    shows=true
+    }
+    if(shows==false){
     Snackbar.show({
-      text:'Mobile number must be atleast 8 digits ',
-      duration:Snackbar.LENGTH_INDEFINITE,
-      action:{
-        text:"OK",
-        textColor: 'red',
-        backgroundColor:'black',
+        text:text,
+        duration:Snackbar.LENGTH_LONG,
+        action:{
+            text:'OK',
+            textColor:'red'
+        }
         
-      }
     })
-  }
-  else
-  this.props.navigation.navigate("Account Verification")
-  }
+}
+}
+
   render() {
     let data = [{
       value: '973',
@@ -72,9 +86,7 @@ export default class Drop extends React.Component {
           <Dropdown data={data} value={971}/>
           </View>
           <TextInput maxLength={12} style={styles.textInput} placeholder="Phone Number" keyboardType={'numeric'}
-          onChangeText={(m)=>{this.setState({mobileNo:m})}
-          
-          }/>
+          onChangeText={(m)=>{this.setState({mobileNo:m})}}/>
           </View>
           {!this.state.mobileNo && (<Text style={{color:'red',paddingLeft:140}}>Please enter the mobile number</Text>)}
           <View style={styles.button}>

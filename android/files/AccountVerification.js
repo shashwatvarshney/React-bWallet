@@ -14,21 +14,30 @@ export default class Def extends React.Component {
       }
       }
       validate=()=>{
-        if(this.state.pin.length<6){
-        Snackbar.show({
-          text:'Please enter a vaild OTP ',
-          duration:Snackbar.LENGTH_INDEFINITE,
-          action:{
-            text:"OK",
-            textColor: 'red',
-            backgroundColor:'black',
-            
-          }
-        })
-      }
-      else
-      this.props.navigation.navigate("Security Questions")
-      }
+        
+                var text1='Enter a valid OTP'
+                var text=''
+                var shows=false
+                var defaultpin=123456
+                if(this.state.pin==0 || this.state.pin!=defaultpin){
+                    text=text1
+                }
+                else {
+                this.props.navigation.navigate("Security Questions")
+                shows=true
+                }
+                if(shows==false){
+                Snackbar.show({
+                    text:text,
+                    duration:Snackbar.LENGTH_LONG,
+                         action:{
+                          text:'OK',
+                          textColor:'red'
+                          }
+                
+                        })
+                    }
+                  } 
 
   render() {
     
