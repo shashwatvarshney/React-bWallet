@@ -20,9 +20,9 @@ export default StyleSheet.create({
       color:'#ffff',
       alignItems:'center'
     },
-    text1:{
-        fontWeight:"bold",
-    },
+    // text1:{
+    //     paddingBottom:20,
+    // },
     logo:{
       padding:20,
       height:30,

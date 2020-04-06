@@ -1,4 +1,3 @@
-
 import React, { Component } from 'react';
 import {
   StyleSheet,Text,View,Image,TextInput,TouchableOpacity,TouchableWithoutFeedback,Keyboard
@@ -10,9 +9,30 @@ export default class Def extends React.Component {
     constructor(props){
         super(props)
         this.state={
-        pin:null
+        pin:0,
+        timer:60
       }
       }
+
+      componentDidMount(){
+        this.interval=setInterval(
+            ()=>this.setState((prevState)=>({timer:prevState.timer-1}) ),1000
+        )
+    }
+    componentDidUpdate(){
+        if(this.state.timer==0){
+            clearInterval(this.interval)
+        }  
+    }
+    componentWillUnmount(){
+        clearInterval(this.interval)
+    }
+    resendOtp=()=>{
+        this.setState({timer:60})
+        this.interval=setInterval(
+            ()=>this.setState((prevState)=>({timer:prevState.timer-1}) ),1000
+        )
+    }
       validate=()=>{
         
                 var text1='Enter a valid OTP'
@@ -61,32 +81,43 @@ export default class Def extends React.Component {
                 keyboardType={'numeric'} />
 
                  <Text style={styles.text1}>Did not get the code?</Text>
-                
+                 <View style={{alignItems:'flex-start',paddingLeft:20}}>
+                 {this.state.timer !=0 &&(
+                       <View style={{flexDirection:'row'}}> 
+                       <Image 
+                          source={require('../files/images/refresh.png')} 
+                          style={styles.ImageIconStyle} 
+                          />
+                       <Text style={[styles.text,{color:'red',textAlign:'right',paddingLeft:30,paddingTop:10}]}>
+                                Click to resend in {this.state.timer} seconds.</Text></View>
+                                )}
+                        {this.state.timer ==0 &&(
+                       <View style={{flexDirection:'row'}}> 
+                       <TouchableOpacity style={{flexDirection:'row'}} onPress={this.resendOtp}>
+                       <Image 
+                          source={require('../files/images/refresh.png')} 
+                          style={styles.ImageIconStyle} 
+                          />
+                       <Text style={[styles.text,{color:'red',textAlign:'right',paddingLeft:30,paddingTop:10}]}>
+                                Click to resend  </Text>
+                                </TouchableOpacity></View>
+                                )}
 
-
-                 
-
+                       </View>
                  <View style={{flexDirection:'column',justifyContent:'space-between'}}>
-                <TouchableOpacity >
- 
-                <Image 
+                {/* <TouchableOpacity >
+                  <Image 
                 source={require('../files/images/refresh.png')} 
                 style={styles.ImageIconStyle} 
                 />
-                <Text style={styles.buttonText1}>
-
-                  Click to resend OTP
-                </Text>
-                  
-                </TouchableOpacity>
+               
+              </TouchableOpacity> */}
                 </View>
                 </View>
                      <View style={styles.button}>
                      <TouchableOpacity onPress={this.validate}
-                        style={styles.button1}
-                        
-                                                >
-                            <Text style={{color:'white', fontSize: 16}}>Verify</Text>
+                        style={styles.button1}>
+                      <Text style={{color:'white', fontSize: 16}}>Verify</Text>
                          </TouchableOpacity>
                 </View>
             </View>
@@ -96,5 +127,3 @@ export default class Def extends React.Component {
         );
   }
 }
-
-
