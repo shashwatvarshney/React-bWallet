@@ -9,13 +9,13 @@ import
   KeyboardAvoidingView,
   TouchableWithoutFeedback,
   Keyboard,
-  KeyboardSpacer} from 'react-native'
+  KeyboardSpacer,Modal,
+ActivityIndicator} from 'react-native'
   import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view'
   
 import { Dropdown } from 'react-native-material-dropdown';
 import Snackbar from 'react-native-snackbar';
 import styles from './styles/styles'
-// import Snackbar from 'react-native-snackbar';
 export default class Drop extends React.Component {
   constructor(props){
     super(props)
@@ -23,6 +23,7 @@ export default class Drop extends React.Component {
       mobileNo:null
     }
   }
+  
   validate=()=>{
        
     var text1='Enter a valid Mobile Number'
@@ -73,8 +74,9 @@ export default class Drop extends React.Component {
         Keyboard.dismiss();
         console.log('dismissed keyboard')
       }}>
-        {/* <KeyboardAwareScrollView style={{flex:1}}
-        behavior="padding"> */}
+          
+       
+        
       <View style={styles.container}>
        <View style={{paddingLeft:60,paddingTop:60}}>
           <Image style={styles.logo} source={require('../files/images/lock.png')}/>
@@ -100,7 +102,8 @@ export default class Drop extends React.Component {
           </View>
 
       </View>
-      {/* </KeyboardAwareScrollView> */}
+  
+     
       </TouchableWithoutFeedback>
     );
   }

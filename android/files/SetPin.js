@@ -1,19 +1,26 @@
 
 import React, { Component } from 'react';
 import {
-  StyleSheet,Text,View,Image,TextInput,TouchableOpacity,TouchableWithoutFeedback,Keyboard
+  StyleSheet,Text,View,Image,TextInput,TouchableOpacity,TouchableWithoutFeedback,Keyboard,Modal,ActivityIndicator
 
 } from 'react-native';
 import SnackBar from 'react-native-snackbar'
  
-export default class Def extends React.Component {
+export default class SetPin extends React.Component {
     constructor(props){
         super(props)
         this.state={
           pin:null,
-          confirm:null
+          confirm:null,timer:true
       }
  }
+ componentDidMount(){
+  setTimeout(()=>{
+    this.setState({timer:false})
+  },7000)
+  
+}
+
  handleNext=()=>{
   var Pin='Enter enter your new PIN!'
   var cpin='Enter the Confirm PIN'
@@ -77,6 +84,18 @@ export default class Def extends React.Component {
         Keyboard.dismiss();
         console.log('dismissed keyboard')
       }}>
+         { this.state.timer ?
+      <Modal>
+    <View style={{backgroundColor:'#000000aa',flex:1,justifyContent:'center',alignItems:'center'}}>
+      <View style={{backgroundColor:'#ffff',flexDirection:'row',width:'80%',height:60,justifyContent:'center',
+      alignItems:'center'}}>
+      <ActivityIndicator size='large' color='red'/>
+      <Text style={{justifyContent:'center',fontSize:20}}>   Processing</Text>
+      </View>
+
+    </View>
+    </Modal> :
+
         <View style={styles.regform}>
             <View style={{paddingLeft:10,paddingRight:20,alignItems:'center'}}>
             <Text style={{fontSize:18,fontWeight:'bold'}}>Enter Pin</Text>
@@ -106,6 +125,7 @@ export default class Def extends React.Component {
           </View>
 
          </View>
+  }
          </TouchableWithoutFeedback>
     );
   }

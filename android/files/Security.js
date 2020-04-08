@@ -1,21 +1,28 @@
 import React, { Component } from 'react';
 import { Dropdown } from 'react-native-material-dropdown';
 import {
-  StyleSheet,Text,View,Image,TextInput,TouchableWithoutFeedback,Keyboard
+  StyleSheet,Text,View,Image,TextInput,TouchableWithoutFeedback,Keyboard,Modal,ActivityIndicator
 
 } from 'react-native';
  import  Drop from './Drop'
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import Snackbar from 'react-native-snackbar';
 import styles from './styles/styles'
-export default class Def extends React.Component
+export default class Security extends React.Component
 {
           constructor(props)
           {
             super(props)
             this.state={
-              ans:null
+              ans:null,
+              timer:true
             }
+          }
+          componentDidMount(){
+            setTimeout(()=>{
+              this.setState({timer:false})
+            },7000)
+            
           }
           validate=()=>{
        
@@ -54,6 +61,17 @@ export default class Def extends React.Component
         Keyboard.dismiss();
         console.log('dismissed keyboard')
       }}>
+         { this.state.timer ?
+        <Modal>
+    <View style={{backgroundColor:'#000000aa',flex:1,justifyContent:'center',alignItems:'center'}}>
+      <View style={{backgroundColor:'#ffff',flexDirection:'row',width:'80%',height:60,justifyContent:'center',
+      alignItems:'center'}}>
+      <ActivityIndicator size='large' color='red'/>
+      <Text style={{justifyContent:'center',fontSize:20}}> processing</Text>
+      </View>
+
+    </View>
+    </Modal> :
     <View style={styles.regform}>
       <View style={{paddingLeft:50,paddingRight:50,}}>
         <Text style={{fontSize:18}}>What is the name of your first school?</Text>
@@ -79,6 +97,7 @@ export default class Def extends React.Component
           </TouchableOpacity>
         </View>
     </View>
+    }
     </TouchableWithoutFeedback>
 
       );

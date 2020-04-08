@@ -1,17 +1,23 @@
-import React, { Component } from 'react';
+  import React, { Component } from 'react';
 import {
-  StyleSheet,Text,View,Image,TextInput,TouchableOpacity,TouchableWithoutFeedback,Keyboard
+  StyleSheet,Text,View,Image,TextInput,TouchableOpacity,TouchableWithoutFeedback,Keyboard,Modal,ActivityIndicator
 
 } from 'react-native';
 import styles from './styles/styles'
 import Snackbar from 'react-native-snackbar';
-export default class Def extends React.Component {
+export default class AccountVerification extends React.Component {
     constructor(props){
         super(props)
         this.state={
         pin:0,
-        timer:60
+        timer:60,timer:true
       }
+      }
+      componentDidMount(){
+        setTimeout(()=>{
+          this.setState({timer:false})
+        },6000)
+        
       }
 
       componentDidMount(){
@@ -67,6 +73,17 @@ export default class Def extends React.Component {
         Keyboard.dismiss();
         console.log('dismissed keyboard')
       }}>
+        { this.state.timer ?
+      <Modal>
+    <View style={{backgroundColor:'#000000aa',flex:1,justifyContent:'center',alignItems:'center'}}>
+      <View style={{backgroundColor:'#ffff',flexDirection:'row',width:'80%',height:60,justifyContent:'center',
+      alignItems:'center'}}>
+      <ActivityIndicator size='large' color='red'/>
+      <Text style={{justifyContent:'center',fontSize:20}}>  Request is being processed</Text>
+      </View>
+
+    </View>
+    </Modal> :
             <View style={styles.regform}>
                 <View style={{paddingLeft:60,paddingRight:50}}>
                 <Text>A Verification code has been sent to{"\n"}
@@ -121,6 +138,7 @@ export default class Def extends React.Component {
                          </TouchableOpacity>
                 </View>
             </View>
+  }
             </TouchableWithoutFeedback>
 
             

@@ -1,11 +1,4 @@
-// png.js:
 
-
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- * @flow
- */
 
 import React, { Component } from 'react';
 import {
@@ -31,7 +24,7 @@ var document=[
 ]
 
 
-export default class App extends React.Component {
+export default class png extends React.Component {
   constructor(props)
           {
             super(props);

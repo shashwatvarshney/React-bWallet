@@ -12,6 +12,8 @@ import sqs from './android/files/Security'
 import fsa from './android/files/ForgotSecurity'
 import sp from './android/files/SetPin'
 import png from './android/files/png'
+
+
 import {NavigationContainer} from '@react-navigation/native'
 import {createStackNavigator} from '@react-navigation/stack'
 const Stack = createStackNavigator()
@@ -28,17 +30,13 @@ export default class App extends React.Component
             headerStyle:{backgroundColor:'white'},
             headerRight:()=><Image style={{width:100,height:30,alignItems:'flex-start'}} source={require('./android/files/images/blogo.png')}/>}}>
            
-            <Stack.Screen name="Forgot PIN?" component={Drop}/>
-            <Stack.Screen name="Account Verification" component={acc}/>
-            <Stack.Screen name="Security Questions" component={sqs}/>
+            <Stack.Screen name="Forgot PIN?" component={Drop}/> 
+             <Stack.Screen name="Account Verification" component={acc}/>
+             <Stack.Screen name="Security Questions" component={sqs}/>
             <Stack.Screen name="Forgot Security Answer" component={fsa}/>
             <Stack.Screen name="Set Pin" component={sp}/>
             <Stack.Screen name="Photo" component={png}/>
-            
-
-
-            
-            </Stack.Navigator>
+             </Stack.Navigator>
         </NavigationContainer>
       // <View  >
        
