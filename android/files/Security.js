@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Dropdown } from 'react-native-material-dropdown';
 import {
-  StyleSheet,Text,View,Image,TextInput,TouchableWithoutFeedback,Keyboard,Modal,ActivityIndicator
+  StyleSheet,Text,View,Image,TextInput,TouchableWithoutFeedback,Keyboard,Modal,ActivityIndicator,BackHandler
 
 } from 'react-native';
  import  Drop from './Drop'
@@ -10,19 +10,29 @@ import Snackbar from 'react-native-snackbar';
 import styles from './styles/styles'
 export default class Security extends React.Component
 {
-          constructor(props)
-          {
+         
+          constructor(props) {
             super(props)
-            this.state={
-              ans:null,
-              timer:true
-            }
+            this.state={ans:null,timer:true}
+            this.handleBackButtonClick = this.handleBackButtonClick.bind(this);
           }
-          componentDidMount(){
+          componentDidMount() {
             setTimeout(()=>{
               this.setState({timer:false})
             },7000)
+          BackHandler.addEventListener('hardwareBackPress', this.handleBackButtonClick);
+          }
+          componentWillUnmount() {
+           
+            BackHandler.removeEventListener('hardwareBackPress', this.handleBackButtonClick);
+          }
+          handleBackButtonClick() {
             
+            
+            
+            this.props.navigation.navigate('Forgot PIN?');
+            
+            return true;
           }
           validate=()=>{
        
@@ -97,7 +107,7 @@ export default class Security extends React.Component
           </TouchableOpacity>
         </View>
     </View>
-    }
+     } 
     </TouchableWithoutFeedback>
 
       );

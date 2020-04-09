@@ -13,14 +13,18 @@ export default class AccountVerification extends React.Component {
         timer:60,timer:true
       }
       }
+      // componentDidMount(){
+      //   setTimeout(()=>{
+      //     this.setState({timer:false})
+      //   },6000)
+        
+      // }
+
       componentDidMount(){
         setTimeout(()=>{
           this.setState({timer:false})
         },6000)
-        
-      }
 
-      componentDidMount(){
         this.interval=setInterval(
             ()=>this.setState((prevState)=>({timer:prevState.timer-1}) ),1000
         )
