@@ -135,7 +135,7 @@ export default class AccountVerification extends React.Component {
             <View style={{backgroundColor:"#000000aa",flex:1,alignItems:'center',justifyContent:'center'}}>
               <View style={{backgroundColor:'#ffff',width:'80%',height:60,flexDirection:'row',alignItems:'center',justifyContent:'flex-start'}}>
                 <ActivityIndicator size='large' color='red'/>
-                <Text style={{justifyContent:'center',paddingHorizontal:10}}>Request is being Processed</Text>
+                <Text style={{justifyContent:'center',paddingHorizontal:10}}>Processing</Text>
               </View>
             </View>
           </Modal>

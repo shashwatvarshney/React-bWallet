@@ -11,7 +11,8 @@ export default class SetPin extends React.Component {
         super(props)
         this.state={
           pin:null,
-          confirm:null,timer:true
+          confirm:null,timer:true,
+          visible:false
       }
  }
  componentDidMount(){
@@ -59,9 +60,15 @@ export default class SetPin extends React.Component {
   else if((list[0]==list[1] && list[1]==list[2])|| (list[1]==list[2] && list[2]==list[3])){
       text="PIN cannot contain same digit consecutively more than 2 times"
   }
-  else{
-      this.props.navigation.navigate('Photo')
-      showSnack=false
+  else {
+    this.setState({visible:true})
+        setTimeout(()=>{
+          this.setState({visible:false})
+          this.props.navigation.navigate("Photo")
+        },1000)
+
+
+  // shows=true
   }
   if(showSnack){
      SnackBar.show({
@@ -84,17 +91,7 @@ export default class SetPin extends React.Component {
         Keyboard.dismiss();
         console.log('dismissed keyboard')
       }}>
-         { this.state.timer ?
-      <Modal>
-    <View style={{backgroundColor:'#000000aa',flex:1,justifyContent:'center',alignItems:'center'}}>
-      <View style={{backgroundColor:'#ffff',flexDirection:'row',width:'80%',height:60,justifyContent:'center',
-      alignItems:'center'}}>
-      <ActivityIndicator size='large' color='red'/>
-      <Text style={{justifyContent:'center',fontSize:20}}>   Processing</Text>
-      </View>
-
-    </View>
-    </Modal> :
+        
 
         <View style={styles.regform}>
             <View style={{paddingLeft:10,paddingRight:20,alignItems:'center'}}>
@@ -123,9 +120,17 @@ export default class SetPin extends React.Component {
               <Text style={styles.text}>Submit</Text>
             </TouchableOpacity>
           </View>
+          <Modal transparent={true} visible={this.state.visible}>
+            <View style={{backgroundColor:"#000000aa",flex:1,alignItems:'center',justifyContent:'center'}}>
+              <View style={{backgroundColor:'#ffff',width:'80%',height:60,flexDirection:'row',alignItems:'center',justifyContent:'flex-start'}}>
+                <ActivityIndicator size='large' color='red'/>
+                <Text style={{justifyContent:'center',paddingHorizontal:10}}>Request is being Processed</Text>
+              </View>
+            </View>
+          </Modal>
 
          </View>
-  }
+  
          </TouchableWithoutFeedback>
     );
   }
