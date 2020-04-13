@@ -10,12 +10,15 @@ import {
 export default class ForgotSecurity extends React.Component {
     constructor(props){
         super(props)
-        this.state={timer:true}
+        this.state={timer:true,visible:false}
       }
       componentDidMount(){
+        this.setState({visible:true})
         setTimeout(()=>{
-          this.setState({timer:false})
-        },7000)
+          this.setState({visible:false})
+          // this.props.navigation.navigate("Photo")
+        },1000)
+
         
       }
   render() {
@@ -26,17 +29,7 @@ export default class ForgotSecurity extends React.Component {
         Keyboard.dismiss();
         console.log('dismissed keyboard')
       }}>
-        { this.state.timer ?
-        <Modal>
-    <View style={{backgroundColor:'#000000aa',flex:1,justifyContent:'center',alignItems:'center'}}>
-      <View style={{backgroundColor:'#ffff',flexDirection:'row',width:'80%',height:60,justifyContent:'center',
-      alignItems:'center'}}>
-      <ActivityIndicator size='large' color='red'/>
-      <Text style={{justifyContent:'center',fontSize:20}}>   Processing</Text>
-      </View>
-
-    </View>
-    </Modal> :
+        
 
         <View style={styles.regform}>
             <View style={{paddingLeft:100,paddingRight:50,paddingTop:10}}>
@@ -56,8 +49,17 @@ export default class ForgotSecurity extends React.Component {
           </TouchableOpacity>
             
              </View>
+             <Modal transparent={true} visible={this.state.visible}>
+            <View style={{backgroundColor:"#000000aa",flex:1,alignItems:'center',justifyContent:'center'}}>
+              <View style={{backgroundColor:'#ffff',width:'80%',height:60,flexDirection:'row',alignItems:'center',justifyContent:'flex-start'}}>
+                <ActivityIndicator size='large' color='red'/>
+                <Text style={{justifyContent:'center',paddingHorizontal:10}}>Processing</Text>
+              </View>
+            </View>
+          </Modal>
+
         </View>
-  }
+  
         </TouchableWithoutFeedback>
     );
   }
