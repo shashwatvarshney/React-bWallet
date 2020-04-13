@@ -20,7 +20,8 @@ export default class Drop extends React.Component {
   constructor(props){
     super(props)
     this.state={
-      mobileNo:null
+      mobileNo:null,
+      visible:false
     }
   }
   
@@ -38,7 +39,12 @@ export default class Drop extends React.Component {
         text=text2
     }
     else {
-    this.props.navigation.navigate("Account Verification")
+      this.setState({visible:true})
+      setTimeout(()=>{
+        this.setState({visible:false})
+        this.props.navigation.navigate("Account Verification")
+      },1000)
+   
     shows=true
     }
     if(shows==false){
@@ -100,6 +106,14 @@ export default class Drop extends React.Component {
               <Text style={styles.text}>Next</Text>
             </TouchableOpacity>
           </View>
+          <Modal transparent={true} visible={this.state.visible}>
+            <View style={{backgroundColor:"#000000aa",flex:1,alignItems:'center',justifyContent:'center'}}>
+              <View style={{backgroundColor:'#ffff',width:'80%',height:60,flexDirection:'row',alignItems:'center',justifyContent:'flex-start'}}>
+                <ActivityIndicator size='large' color='red'/>
+                <Text style={{justifyContent:'center',paddingHorizontal:10}}>Request is being Processed</Text>
+              </View>
+            </View>
+          </Modal>
 
       </View>
   

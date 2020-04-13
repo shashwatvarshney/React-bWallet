@@ -10,20 +10,15 @@ export default class AccountVerification extends React.Component {
         super(props)
         this.state={
         pin:0,
-        timer:60,timer:true
+        timer:60,time:true,
+        visible:false
+        // activity:false
       }
       }
-      // componentDidMount(){
-      //   setTimeout(()=>{
-      //     this.setState({timer:false})
-      //   },6000)
-        
-      // }
+      
 
       componentDidMount(){
-        setTimeout(()=>{
-          this.setState({timer:false})
-        },6000)
+        
 
         this.interval=setInterval(
             ()=>this.setState((prevState)=>({timer:prevState.timer-1}) ),1000
@@ -53,7 +48,12 @@ export default class AccountVerification extends React.Component {
                     text=text1
                 }
                 else {
-                this.props.navigation.navigate("Security Questions")
+                  this.setState({visible:true})
+                  setTimeout(()=>{
+                    this.setState({visible:false})
+                    this.props.navigation.navigate("Security Questions")
+                  },1000)
+        //         this.props.navigation.navigate("Security Questions")
                 shows=true
                 }
                 if(shows==false){
@@ -77,17 +77,7 @@ export default class AccountVerification extends React.Component {
         Keyboard.dismiss();
         console.log('dismissed keyboard')
       }}>
-        { this.state.timer ?
-      <Modal>
-    <View style={{backgroundColor:'#000000aa',flex:1,justifyContent:'center',alignItems:'center'}}>
-      <View style={{backgroundColor:'#ffff',flexDirection:'row',width:'80%',height:60,justifyContent:'center',
-      alignItems:'center'}}>
-      <ActivityIndicator size='large' color='red'/>
-      <Text style={{justifyContent:'center',fontSize:20}}>  Request is being processed</Text>
-      </View>
-
-    </View>
-    </Modal> :
+       
             <View style={styles.regform}>
                 <View style={{paddingLeft:60,paddingRight:50}}>
                 <Text>A Verification code has been sent to{"\n"}
@@ -141,8 +131,16 @@ export default class AccountVerification extends React.Component {
                       <Text style={{color:'white', fontSize: 16}}>Verify</Text>
                          </TouchableOpacity>
                 </View>
+                <Modal transparent={true} visible={this.state.visible}>
+            <View style={{backgroundColor:"#000000aa",flex:1,alignItems:'center',justifyContent:'center'}}>
+              <View style={{backgroundColor:'#ffff',width:'80%',height:60,flexDirection:'row',alignItems:'center',justifyContent:'flex-start'}}>
+                <ActivityIndicator size='large' color='red'/>
+                <Text style={{justifyContent:'center',paddingHorizontal:10}}>Request is being Processed</Text>
+              </View>
             </View>
-  }
+          </Modal>
+            </View>
+                
             </TouchableWithoutFeedback>
 
             
