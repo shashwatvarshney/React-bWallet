@@ -13,13 +13,11 @@ export default class Security extends React.Component
          
           constructor(props) {
             super(props)
-            this.state={ans:null,timer:true}
+            this.state={ans:null,timer:true,visible:false}
             this.handleBackButtonClick = this.handleBackButtonClick.bind(this);
           }
           componentDidMount() {
-            setTimeout(()=>{
-              this.setState({timer:false})
-            },7000)
+            
           BackHandler.addEventListener('hardwareBackPress', this.handleBackButtonClick);
           }
           componentWillUnmount() {
@@ -48,7 +46,13 @@ export default class Security extends React.Component
                 text=text2
             }
             else {
-            this.props.navigation.navigate("Set Pin")
+              this.setState({visible:true})
+                  setTimeout(()=>{
+                    this.setState({visible:false})
+                    this.props.navigation.navigate("Set Pin")
+                  },1000)
+
+          
             shows=true
             }
             if(shows==false){
@@ -71,17 +75,7 @@ export default class Security extends React.Component
         Keyboard.dismiss();
         console.log('dismissed keyboard')
       }}>
-         { this.state.timer ?
-        <Modal>
-    <View style={{backgroundColor:'#000000aa',flex:1,justifyContent:'center',alignItems:'center'}}>
-      <View style={{backgroundColor:'#ffff',flexDirection:'row',width:'80%',height:60,justifyContent:'center',
-      alignItems:'center'}}>
-      <ActivityIndicator size='large' color='red'/>
-      <Text style={{justifyContent:'center',fontSize:20}}> processing</Text>
-      </View>
-
-    </View>
-    </Modal> :
+         
     <View style={styles.regform}>
       <View style={{paddingLeft:50,paddingRight:50,}}>
         <Text style={{fontSize:18}}>What is the name of your first school?</Text>
@@ -106,8 +100,16 @@ export default class Security extends React.Component
             </Text>
           </TouchableOpacity>
         </View>
+        <Modal transparent={true} visible={this.state.visible}>
+            <View style={{backgroundColor:"#000000aa",flex:1,alignItems:'center',justifyContent:'center'}}>
+              <View style={{backgroundColor:'#ffff',width:'80%',height:60,flexDirection:'row',alignItems:'center',justifyContent:'flex-start'}}>
+                <ActivityIndicator size='large' color='red'/>
+                <Text style={{justifyContent:'center',paddingHorizontal:10}}>Request is being Processed</Text>
+              </View>
+            </View>
+          </Modal>
     </View>
-     } 
+     
     </TouchableWithoutFeedback>
 
       );
