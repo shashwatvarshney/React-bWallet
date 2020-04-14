@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { Dropdown } from 'react-native-material-dropdown';
 import {
   StyleSheet,Text,View,Image,TextInput,TouchableOpacity,TouchableWithoutFeedback,Keyboard,Modal,ActivityIndicator
-
+  ,ToastAndroid
 } from 'react-native';
  
  import styles from './styles/styles'
@@ -20,6 +20,11 @@ export default class ForgotSecurity extends React.Component {
         },1000)
 
         
+      }
+      validate=()=>{
+        var text="A verification link has been sent to your email id"
+        ToastAndroid.show(text,ToastAndroid.LONG)
+        this.props.navigation.navigate("Forgot PIN?")
       }
   render() {
     
@@ -44,7 +49,7 @@ export default class ForgotSecurity extends React.Component {
             </View>
 
              <View style={{paddingRight:30,paddingLeft:60,paddingBottom:0}}>
-             <TouchableOpacity>
+             <TouchableOpacity onPress={this.validate}>
           <Text style={styles.buttonText2}>VERIFY EMAIL</Text>
           </TouchableOpacity>
             

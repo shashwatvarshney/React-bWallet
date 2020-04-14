@@ -15,12 +15,15 @@ import png from './android/files/png'
 
 
 import {NavigationContainer} from '@react-navigation/native'
-import {createStackNavigator} from '@react-navigation/stack'
+import {createStackNavigator,HeaderBackButton} from '@react-navigation/stack'
+import { TouchableOpacity } from 'react-native-gesture-handler';
 const Stack = createStackNavigator()
 
 export default class App extends React.Component 
 {
-  
+  constructor(props){
+    super(props)
+  }
   render(){
     return(
 
@@ -32,7 +35,8 @@ export default class App extends React.Component
            
             <Stack.Screen name="Forgot PIN?" component={Drop}/> 
              <Stack.Screen name="Account Verification" component={acc}/>
-             <Stack.Screen name="Security Questions" component={sqs}/>
+             <Stack.Screen name="Security Questions" component={sqs}
+             options={({navigation})=>{return {headerLeft:()=><HeaderBackButton onPress={()=>navigation.navigate("Forgot PIN?")} />}}} />
             <Stack.Screen name="Forgot Security Answer" component={fsa}/>
             <Stack.Screen name="Set Pin" component={sp}/>
             <Stack.Screen name="Photo" component={png}/>
@@ -46,6 +50,9 @@ export default class App extends React.Component
       // </View>
       // <Pick />
     );
+  }
+  back=({navigation})=>{
+    navigation.navigate("Forgot PIN?")
   }
 }
 
